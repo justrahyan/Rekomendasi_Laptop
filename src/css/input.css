@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .category {
+    @apply w-full lg:min-w-48 h-20 aspect-square object-cover block flex justify-center items-center border border-slate-400 rounded-md;
+  }
+  .rekomendasi {
+    @apply min-w-48 h-max object-cover overflow-hidden border border-slate-200 rounded-lg flex flex-col;
+  }
+  .product {
+    @apply w-[calc(16.666%-0.75rem)] border border-slate-200 rounded-lg bg-white overflow-hidden;
+  }
+  .brand-products {
+    @apply w-[calc(50%-0.75rem)] md:w-[calc(25%-0.75rem)] border border-slate-200 rounded-lg bg-white overflow-hidden;
+  }
+
+  @media (max-width: 1024px) {
+    .product {
+      @apply basis-[calc(33.33%-0.75rem)];
+    }
+  }
+
+  @media (max-width: 768px) {
+    .rekomendasi {
+      @apply min-w-40;
+    }
+    .product {
+      @apply basis-[calc(50%-0.75rem)];
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 991px) {
+    .rekomendasi {
+      @apply min-w-44;
+    }
+  }
+}
