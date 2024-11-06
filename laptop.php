@@ -71,7 +71,7 @@
                 <div class="text w-full lg:w-2/3 h-full lg:overflow-hidden">
                     <div class="sticky top-0 bg-white w-full px-4 py-2 flex flex-row justify-between items-start">
                         <div class="nama_laptop flex flex-col">
-                            <div class="nama text-lg lg:text-2xl font-bold mb-2 uppercase"><?php echo $row['nama_laptop']; ?></div>
+                            <div class="nama text-lg lg:text-2xl font-bold mb-2 capitalize"><?php echo $row['nama_laptop']; ?></div>
                             <div class="kode text-sm lg:text-lg font-normal mb-2 uppercase"><?php echo $row['kode_laptop']; ?></div>
                         </div>
                         <div class="text-sm lg:text-lg font-semibold mb-2"><?php echo  'Rp. ' . number_format($row['harga'],2,',','.'); ?></div>
@@ -151,9 +151,8 @@
           <div class="feature bg-darkblue border border-slate-300 w-full flex flex-row items-center rounded-lg">
               <div class="text px-10 py-5 w-full lg:w-1/2 text-white">
                   <h1 class="text-xl md:text-2xl lg:text-5xl font-bold mb-5">Coba Bandingkan Laptop?</h1>
-                  <p class="mb-7">Coba fitur Bandingkan Laptop untuk membandingkan laptop tersebut dengan laptop lainnya!</p>
+                  <p class="mb-7">Coba fitur Bandingkan Laptop untuk membandingkan laptop ini dengan laptop lainnya!</p>
                     <?php
-                          // Include connection file and use prepared statement
                           $query = "SELECT * FROM laptop WHERE id_laptop = ?";
                           $stmt = mysqli_prepare($koneksi, $query);
                           mysqli_stmt_bind_param($stmt, "i", $id);

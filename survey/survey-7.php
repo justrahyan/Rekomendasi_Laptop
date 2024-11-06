@@ -1,3 +1,6 @@
+<?php 
+    include "../koneksi.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,20 +63,22 @@
                     <h1 class="text-xl md:text-xl font-bold mb-2 lg:mb-5">Tahun berapa keluaran laptop yang anda inginkan?</h1>
                 </div>
                 <div class="option w-full lg:w-1/2 text-paragraph">
-                    <div class="space-y-3">
-                        <label class="flex bg-gray-100 text-gray-700 rounded-md px-3 py-2 has-[:checked]:bg-darkblue has-[:checked]:text-white cursor-pointer">
-                            <input type="radio" name="keluaran" class="hidden" value="terbaru">
-                            <span class="pl-2">Laptop terbaru (tahun ini)</span>
-                        </label>
-                        <label class="flex bg-gray-100 text-gray-700 rounded-md px-3 py-2 has-[:checked]:bg-darkblue has-[:checked]:text-white cursor-pointer">
-                            <input type="radio" name="keluaran" class="hidden" value="1_2_tahun">
-                            <span class="pl-2">Keluaran 1 - 2 tahun terakhir</span>
-                        </label>
-                        <label class="flex bg-gray-100 text-gray-700 rounded-md px-3 py-2 has-[:checked]:bg-darkblue has-[:checked]:text-white cursor-pointer">
-                            <input type="radio" name="keluaran" class="hidden" value="bebas">
-                            <span class="pl-2">Tidak masalah asalkan performanya bagus</span>
-                        </label>
-                    </div>
+                    <form action="value-handler.php" method="POST">
+                        <div class="space-y-3">
+                            <label class="flex bg-gray-100 text-gray-700 rounded-md px-3 py-2 has-[:checked]:bg-darkblue has-[:checked]:text-white cursor-pointer">
+                                <input type="radio" name="keluaran" class="hidden" value="terbaru">
+                                <span class="pl-2">Laptop terbaru (tahun ini)</span>
+                            </label>
+                            <label class="flex bg-gray-100 text-gray-700 rounded-md px-3 py-2 has-[:checked]:bg-darkblue has-[:checked]:text-white cursor-pointer">
+                                <input type="radio" name="keluaran" class="hidden" value="1_2_tahun">
+                                <span class="pl-2">Keluaran 1 - 2 tahun terakhir</span>
+                            </label>
+                            <label class="flex bg-gray-100 text-gray-700 rounded-md px-3 py-2 has-[:checked]:bg-darkblue has-[:checked]:text-white cursor-pointer">
+                                <input type="radio" name="keluaran" class="hidden" value="bebas">
+                                <span class="pl-2">Tidak masalah asalkan performanya bagus</span>
+                            </label>
+                        </div>
+                    </form>
                 </div>
             </div>
             <div class="info bg-slate-400/40 flex flex-row items-center gap-3 w-full p-3 rounded-lg">

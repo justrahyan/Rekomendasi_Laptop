@@ -1,3 +1,6 @@
+<?php 
+    include "../koneksi.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,39 +43,38 @@
     </nav>
 
     <!-- Guide Section -->
-    <section id="guide">
-      <div class="container mx-auto px-4 pt-28 lg:px-36">
-        <div class="guide-info bg-darkblue w-[95%] p-2 flex items-center justify-center gap-3 m-auto rounded-t-lg">
-            <div class="ping relative bg-[#63738A] w-[18px] h-[18px] rounded-full flex items-center justify-center">
-              <div class="absolute w-[10px] h-[10px] bg-skyblue/70 rounded-full animate-ping"></div>
-              <div class="w-[10px] h-[10px] bg-skyblue rounded-full"></div>
-            </div>
-            <p class="text-white text-sm mb-0">Disarankan untuk dibaca terlebih dahulu!</p>
+    <section id="product">
+      <div class="container mx-auto pt-40 lg:pt-28 pb-10 flex flex-col justify-between lg:px-36">
+        <div class="product-heading mb-4 pb-4 border-b-paragraph border-b">
+          <h1 class="font-bold text-xl text-center">Hasil Survei Rekomendasi</h1>
         </div>
-        <div class="guide bg-skyblue border border-slate-300 w-full flex flex-col lg:flex-row items-start pt-8 px-5 pb-5 rounded-lg">
-            <div class="text px-5 w-full lg:w-1/3 text-paragraph">
-                <h1 class="text-xl md:text-2xl font-bold mb-2 lg:mb-5">Panduan Pengguna</h1>
-                <p class="mb-7 text-sm">Selamat datang di fitur Survei Preferensi aplikasi rekomendasi laptop kami! Fitur ini dirancang untuk membantu kamu dalam memilih laptop yang sesuai dengan kebutuhan dan preferensi kamu. Sebelum memulai, harap perhatikan panduan berikut:</p>
-            </div>
-            <div class="image w-full lg:w-1/3 rounded-lg my-4 lg:my-0">
-                <img src="../src/img/guide-img.png" alt="Rekomendasi Laptop Terbaik!" class="w-[22rem] m-auto">
-            </div>
-            <div class="text px-5 w-full lg:w-1/3 text-paragraph">
-              <h1 class="text-xl md:text-2xl font-bold mb-2 lg:mb-5">Jawab sesuai kebutuhan</h1>
-              <p class="mb-7 text-sm">Mohon jawab pertanyaan sesuai dengan kebutuhan dan preferensi kamu untuk hasil survei yang lebih akurat. Hasilnya akan sangat bergantung pada jawaban yang kamu berikan</p>
-            </div>
+        <div class="brand-container flex flex-col gap-3 lg:gap-0 lg:flex-row">
+          <div class="brand-series bg-white overflow-hidden flex flex-col w-full lg:w-1/4 gap-2 py-3 px-4 lg:py-0 sticky top-[9rem] lg:top-[6rem] z-50" style="align-self: flex-start;" id="brandSeries">
+            <h1 class="font-semibold text-lg">Pilhan Anda</h1>
+              <p>Budget</p>
+          </div>
+            
+          <div class="product-container flex flex-wrap w-full lg:w-3/4 gap-3 px-4 lg:px-0" id="product-list">
+              <?php
+              $query = "SELECT * FROM laptop limit 8";
+              $result = mysqli_query($koneksi, $query);
+              while ($row = mysqli_fetch_assoc($result)) {
+              ?>
+                  <div class="brand-products group" data-seri="<?php echo $row['seri']; ?>">
+                      <a href="laptop.php?id=<?php echo $row['id_laptop'] ?>">
+                          <img src="<?php echo './src/img/laptop-img/' . $row['gambar']; ?>" alt="" class="w-[70%] lg:w-full mx-auto object-cover bg-white p-2 transform transition duration-300 group-hover:scale-110">
+                          <div class="content py-2 px-3 flex flex-col flex-grow">
+                              <div class="penggunaan text-xs mb-2 text-slate-400 capitalize"><?php echo $row['penggunaan']; ?></div>
+                              <div class="nama text-sm font-semibold mb-2 hover:underline uppercase"><?php echo $row['nama_laptop']; ?></div>
+                              <div class="nama text-xs font-normal mb-2 uppercase"><?php echo $row['kode_laptop']; ?></div>
+                              <div class="spesifikasi text-xs text-slate-400 truncate"><?php echo $row['prosessor']; ?></div>
+                          </div>
+                      </a>
+                  </div>
+              <?php } ?>
+          </div>
         </div>
       </div>
-     </section>
-
-     <!-- Button -->
-     <section id="button">
-        <div class="container mx-auto px-4 py-3 flex flex-row justify-between items-center lg:px-36 mt-5">
-            <!-- Next -->
-            <a href="./survey-1.php" class="py-3 px-8 bg-darkblue text-white w-full text-center gap-2 hover:bg-darkblue/80 rounded-lg">
-                Lanjutkan
-            </a>
-        </div>
     </section>
 
     <!-- Main Js -->

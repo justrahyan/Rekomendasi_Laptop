@@ -69,8 +69,8 @@
           <img src="<?php echo $logoPath; ?>" alt="<?php echo $merek; ?> logo" class="w-20 mx-auto lg:ml-0">
         </div>
         <div class="brand-container flex flex-col gap-3 lg:gap-0 lg:flex-row">
-          <div class="brand-series bg-white overflow-hidden flex flex-col w-full lg:w-1/4 gap-2 py-3 px-4 lg:py-0 sticky top-[9rem] lg:top-[6rem]" style="align-self: flex-start;" id="brandSeries">
-            <h1 class="font-semibold text-lg " onclick="toggleBrandSeries()">Berdasarkan Seri</h1>
+          <div class="brand-series bg-white overflow-hidden flex flex-col w-full lg:w-1/4 gap-2 py-3 px-4 lg:py-0 sticky top-[9rem] lg:top-[6rem] z-50" style="align-self: flex-start;" id="brandSeries">
+            <h1 class="font-semibold text-lg" onclick="toggleBrandSeries()">Berdasarkan Seri</h1>
               <div class="hidden lg:flex flex-col gap-2 transition-all duration-300 ease-in-out" id="brandContent">
                 <?php
                 $merek = isset($_GET['merek']) ? strtolower($_GET['merek']) : '';
@@ -82,7 +82,7 @@
                         <input type="checkbox" name="tuf_gaming" id="tuf_gaming" value="ASUS TUF Gaming" onclick="updateProducts()"><label for="tuf_gaming">Asus TUF Gaming</label>
                     </div>
                     <div class="flex flex-row gap-2">
-                        <input type="checkbox" name="vivobook" id="vivobook" value="ASUS Vivobook" onclick="updateProducts()"><label for="vivobook">Asus Vivobook</label>
+                        <input type="checkbox" name="vivobook" id="vivobook" value="ASUS VivoBook" onclick="updateProducts()"><label for="vivobook">Asus VivoBook</label>
                     </div>
                     <div class="flex flex-row gap-2">
                         <label for="rog">Asus ROG</label>
@@ -112,6 +112,9 @@
                 ?>
                     <div class="flex flex-row gap-2">
                         <input type="checkbox" name="predator" id="predator" value="ACER Predator" onclick="updateProducts()"><label for="predator">Acer Predator</label>
+                    </div>
+                    <div class="flex flex-row gap-2">
+                        <input type="checkbox" name="ChromeBook" id="ChromeBook" value="ACER ChromeBook" onclick="updateProducts()"><label for="ChromeBook">Acer ChromeBook</label>
                     </div>
                     <div class="flex flex-row gap-2">
                         <input type="checkbox" name="aspire" id="aspire" value="ACER Aspire" onclick="updateProducts()"><label for="aspire">Acer Aspire</label>
@@ -150,13 +153,18 @@
                         <input type="checkbox" name="legion" id="legion" value="LENOVO Legion" onclick="updateProducts()"><label for="legion">Lenovo Legion</label>
                     </div>
                     <div class="flex flex-row gap-2">
-                        <input type="checkbox" name="yoga" id="yoga" value="LENOVO Yoga" onclick="updateProducts()"><label for="yoga">Lenovo Yoga</label>
+                        <label for="rog">Lenovo Yoga</label>
                     </div>
-                    <div class="flex flex-row gap-2">
-                        <input type="checkbox" name="xiaoxin" id="xiaoxin" value="LENOVO Xiaoxin" onclick="updateProducts()"><label for="xiaoxin">Lenovo Xiaoxin</label>
-                    </div>
-                    <div class="flex flex-row gap-2">
-                        <input type="checkbox" name="ai_pcs" id="ai_pcs" value="LENOVO AI Pcs" onclick="updateProducts()"><label for="ai_pcs">Lenovo AI Pcs</label>
+                    <div class="flex flex-col pl-4">
+                        <div class="flex flex-row gap-2">
+                            <input type="checkbox" name="yoga_pro" id="yoga_pro" value="LENOVO Yoga Pro" onclick="updateProducts()"><label for="yoga_pro">Lenovo Yoga Pro</label>
+                        </div>
+                        <div class="flex flex-row gap-2">
+                            <input type="checkbox" name="yoga_slim" id="yoga_slim" value="LENOVO Yoga Slim" onclick="updateProducts()"><label for="yoga_slim">Lenovo Yoga Slim</label>
+                        </div>
+                        <div class="flex flex-row gap-2">
+                            <input type="checkbox" name="yoga_2in1" id="yoga_2in1" value="LENOVO Yoga 2 in 1" onclick="updateProducts()"><label for="yoga_2in1">Lenovo Yoga 2 in 1</label>
+                        </div>
                     </div>
                 <?php
                 } elseif ($merek === 'hp') {
@@ -168,25 +176,22 @@
                         <input type="checkbox" name="elite" id="elite" value="HP Elite" onclick="updateProducts()"><label for="elite">HP Elite</label>
                     </div>
                     <div class="flex flex-row gap-2">
-                        <input type="checkbox" name="elitebook" id="elitebook" value="HP Elitebook" onclick="updateProducts()"><label for="elitebook">HP Elitebook</label>
-                    </div>
-                    <div class="flex flex-row gap-2">
                         <input type="checkbox" name="essential" id="essential" value="HP Essential" onclick="updateProducts()"><label for="essential">HP Essential</label>
                     </div>
                     <div class="flex flex-row gap-2">
                         <input type="checkbox" name="hp-essentials" id="hp-essentials" value="HP Essentials" onclick="updateProducts()"><label for="hp-essentials">HP Essentials</label>
                     </div>
                     <div class="flex flex-row gap-2">
-                        <input type="checkbox" name="omnibook-x" id="omnibook-x" value="HP Omnibook X" onclick="updateProducts()"><label for="omnibook-x">HP Omnibook X</label>
+                        <input type="checkbox" name="omnibook-x" id="omnibook-x" value="HP OmniBook X" onclick="updateProducts()"><label for="omnibook-x">HP OmniBook X</label>
                     </div>
                     <div class="flex flex-row gap-2">
-                        <input type="checkbox" name="omnibook-ultra" id="omnibook-ultra" value="HP Omnibook Ultra" onclick="updateProducts()"><label for="omnibook-ultra">HP Omnibook Ultra</label>
+                        <input type="checkbox" name="omnibook-ultra" id="omnibook-ultra" value="HP OmniBook Ultra" onclick="updateProducts()"><label for="omnibook-ultra">HP OmniBook Ultra</label>
                     </div>
                     <div class="flex flex-row gap-2">
                         <input type="checkbox" name="pavilion" id="pavilion" value="HP Pavilion" onclick="updateProducts()"><label for="pavilion">HP Pavilion</label>
                     </div>
                     <div class="flex flex-row gap-2">
-                        <input type="checkbox" name="pro" id="pro" value="HP Pro" onclick="updateProducts()"><label for="pro">HP Pro</label>
+                        <input type="checkbox" name="pro" id="pro" value="HP ProBook" onclick="updateProducts()"><label for="pro">HP Pro</label>
                     </div>
                     <div class="flex flex-row gap-2">
                         <input type="checkbox" name="spectre" id="spectre" value="HP Spectre" onclick="updateProducts()"><label for="spectre">HP Spectre</label>
@@ -195,7 +200,7 @@
                         <input type="checkbox" name="victus" id="victus" value="HP Victus" onclick="updateProducts()"><label for="victus">HP Victus</label>
                     </div>
                     <div class="flex flex-row gap-2">
-                        <input type="checkbox" name="z_by_hp" id="z_by_hp" value="HP Z by HP" onclick="updateProducts()"><label for="z_by_hp">HP Z by HP</label>
+                        <input type="checkbox" name="z_by_hp" id="z_by_hp" value="HP ZBook" onclick="updateProducts()"><label for="z_by_hp">HP Z by HP</label>
                     </div>
                 <?php
                 } elseif ($merek === 'apple') {
@@ -218,9 +223,6 @@
                     <div class="flex flex-row gap-2">
                         <input type="checkbox" name="saga" id="saga" value="AXIOO Saga" onclick="updateProducts()"><label for="saga">Axioo Saga</label>
                     </div>
-                    <div class="flex flex-row gap-2">
-                        <input type="checkbox" name="mybook" id="mybook" value="AXIOO Mybook" onclick="updateProducts()"><label for="mybook">Axioo Mybook</label>
-                    </div>
                 <?php
                 } elseif ($merek === 'msi') {
                 ?>
@@ -228,7 +230,7 @@
                         <input type="checkbox" name="cyborg" id="cyborg" value="MSI Cyborg-Thin" onclick="updateProducts()"><label for="cyborg">MSI Cyborg/Thin</label>
                     </div>
                     <div class="flex flex-row gap-2">
-                        <input type="checkbox" name="bravo" id="bravo" value="MSI Bravo-Alpha" onclick="updateProducts()"><label for="bravo">MSI Bravo/Alpha</label>
+                        <input type="checkbox" name="bravo" id="bravo" value="MSI Alpha-Bravo" onclick="updateProducts()"><label for="bravo">MSI Bravo/Alpha</label>
                     </div>
                     <div class="flex flex-row gap-2">
                         <input type="checkbox" name="stealth" id="stealth" value="MSI Stealth" onclick="updateProducts()"><label for="stealth">MSI Stealth</label>
@@ -264,7 +266,7 @@
                         <input type="checkbox" name="gseries" id="gseries" value="DELL G Series" onclick="updateProducts()"><label for="gseries">Dell G Series</label>
                     </div>
                     <div class="flex flex-row gap-2">
-                        <input type="checkbox" name="presicion" id="presicion" value="DELL Presicion" onclick="updateProducts()"><label for="presicion">Dell Presicion</label>
+                        <input type="checkbox" name="precision" id="precision" value="DELL Precision" onclick="updateProducts()"><label for="precision">Dell Precision</label>
                     </div>
                     <div class="flex flex-row gap-2">
                         <input type="checkbox" name="alienware" id="alienware" value="DELL Alienware" onclick="updateProducts()"><label for="alienware">Dell Alienware</label>
@@ -275,7 +277,7 @@
               </div>
           </div>
             
-          <div class="product-container flex flex-wrap w-3/4 gap-3 px-4 lg:px-0" id="product-list">
+          <div class="product-container flex flex-wrap w-full lg:w-3/4 gap-3 px-4 lg:px-0" id="product-list">
               <?php
               $query = "SELECT l.*, m.nama_merek FROM laptop l
                         JOIN merek m ON l.merek = m.nama_merek
@@ -288,7 +290,7 @@
                           <img src="<?php echo './src/img/laptop-img/' . $row['gambar']; ?>" alt="" class="w-[70%] lg:w-full mx-auto object-cover bg-white p-2 transform transition duration-300 group-hover:scale-110">
                           <div class="content py-2 px-3 flex flex-col flex-grow">
                               <div class="penggunaan text-xs mb-2 text-slate-400 capitalize"><?php echo $row['penggunaan']; ?></div>
-                              <div class="nama text-sm font-semibold mb-2 hover:underline uppercase"><?php echo $row['nama_laptop']; ?></div>
+                              <div class="nama text-sm font-semibold mb-2 hover:underline capitalize"><?php echo $row['nama_laptop']; ?></div>
                               <div class="nama text-xs font-normal mb-2 uppercase"><?php echo $row['kode_laptop']; ?></div>
                               <div class="spesifikasi text-xs text-slate-400 truncate"><?php echo $row['prosessor']; ?></div>
                           </div>

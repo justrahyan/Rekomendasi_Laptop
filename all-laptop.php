@@ -64,7 +64,7 @@
         </div>
         <div class="product-container flex flex-wrap w-full gap-3">
           <?php
-            $query = "SELECT * FROM laptop ORDER BY RAND();";
+            $query = "SELECT * FROM laptop ORDER BY nama_laptop ASC;";
             $result = mysqli_query($koneksi, $query);
             // var_dump($result);
             $i = 1; 
@@ -75,7 +75,7 @@
               <img src="<?php echo './src/img/laptop-img/' . $row['gambar']; ?>" alt="" class="w-[70%] lg:w-full mx-auto object-cover bg-white p-2 transform transition duration-300 group-hover:scale-110">
               <div class="content py-2 px-3 flex flex-col flex-grow">
                 <div class="penggunaan text-xs mb-2 text-slate-400 capitalize"><?php echo $row['penggunaan']; ?></div>
-                <div class="nama text-sm font-semibold mb-2 hover:underline uppercase"><?php echo $row['nama_laptop']; ?></div>
+                <div class="nama text-sm font-semibold mb-2 hover:underline capitalize"><?php echo $row['nama_laptop']; ?></div>
                 <div class="nama text-xs font-normal mb-2 uppercase"><?php echo $row['kode_laptop']; ?></div>
                 <div class="spesifikasi text-xs text-slate-400 truncate"><?php echo $row['prosessor']; ?></div>
               </div>

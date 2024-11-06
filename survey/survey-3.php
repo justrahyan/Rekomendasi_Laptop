@@ -1,3 +1,6 @@
+<?php 
+    include "../koneksi.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,44 +63,46 @@
                     <h1 class="text-xl md:text-xl font-bold mb-2 lg:mb-5">Apakah ada merek laptop yang anda sukai?</h1>
                 </div>
                 <div class="option w-full lg:w-1/2 text-paragraph">
-                    <div class="space-y-3">
-                        <label class="flex bg-gray-100 text-gray-700 rounded-md px-3 py-2 has-[:checked]:bg-darkblue has-[:checked]:text-white cursor-pointer">
-                            <input type="radio" name="merek" class="hidden" value="asus">
-                            <span class="pl-2">Asus</span>
-                        </label>
-                        <label class="flex bg-gray-100 text-gray-700 rounded-md px-3 py-2 has-[:checked]:bg-darkblue has-[:checked]:text-white cursor-pointer">
-                            <input type="radio" name="merek" class="hidden" value="acer">
-                            <span class="pl-2">Acer</span>
-                        </label>
-                        <label class="flex bg-gray-100 text-gray-700 rounded-md px-3 py-2 has-[:checked]:bg-darkblue has-[:checked]:text-white cursor-pointer">
-                            <input type="radio" name="merek" class="hidden" value="apple">
-                            <span class="pl-2">Apple</span>
-                        </label>
-                        <label class="flex bg-gray-100 text-gray-700 rounded-md px-3 py-2 has-[:checked]:bg-darkblue has-[:checked]:text-white cursor-pointer">
-                            <input type="radio" name="merek" class="hidden" value="hp">
-                            <span class="pl-2">HP</span>
-                        </label>
-                        <label class="flex bg-gray-100 text-gray-700 rounded-md px-3 py-2 has-[:checked]:bg-darkblue has-[:checked]:text-white cursor-pointer">
-                            <input type="radio" name="merek" class="hidden" value="lenovo">
-                            <span class="pl-2">Lenovo</span>
-                        </label>
-                        <label class="flex bg-gray-100 text-gray-700 rounded-md px-3 py-2 has-[:checked]:bg-darkblue has-[:checked]:text-white cursor-pointer">
-                            <input type="radio" name="merek" class="hidden" value="msi">
-                            <span class="pl-2">MSI</span>
-                        </label>
-                        <label class="flex bg-gray-100 text-gray-700 rounded-md px-3 py-2 has-[:checked]:bg-darkblue has-[:checked]:text-white cursor-pointer">
-                            <input type="radio" name="merek" class="hidden" value="axioo">
-                            <span class="pl-2">Axioo</span>
-                        </label>
-                        <label class="flex bg-gray-100 text-gray-700 rounded-md px-3 py-2 has-[:checked]:bg-darkblue has-[:checked]:text-white cursor-pointer">
-                            <input type="radio" name="merek" class="hidden" value="dell">
-                            <span class="pl-2">Dell</span>
-                        </label>
-                        <label class="flex bg-gray-100 text-gray-700 rounded-md px-3 py-2 has-[:checked]:bg-darkblue has-[:checked]:text-white cursor-pointer">
-                            <input type="radio" name="merek" class="hidden" value="tidak-ada">
-                            <span class="pl-2">Tidak Ada Preferensi</span>
-                        </label>
-                    </div>
+                    <form action="value-handler.php" method="POST">
+                        <div class="space-y-3">
+                            <label class="flex bg-gray-100 text-gray-700 rounded-md px-3 py-2 has-[:checked]:bg-darkblue has-[:checked]:text-white cursor-pointer">
+                                <input type="radio" name="merek" class="hidden" value="asus">
+                                <span class="pl-2">Asus</span>
+                            </label>
+                            <label class="flex bg-gray-100 text-gray-700 rounded-md px-3 py-2 has-[:checked]:bg-darkblue has-[:checked]:text-white cursor-pointer">
+                                <input type="radio" name="merek" class="hidden" value="acer">
+                                <span class="pl-2">Acer</span>
+                            </label>
+                            <label class="flex bg-gray-100 text-gray-700 rounded-md px-3 py-2 has-[:checked]:bg-darkblue has-[:checked]:text-white cursor-pointer">
+                                <input type="radio" name="merek" class="hidden" value="apple">
+                                <span class="pl-2">Apple</span>
+                            </label>
+                            <label class="flex bg-gray-100 text-gray-700 rounded-md px-3 py-2 has-[:checked]:bg-darkblue has-[:checked]:text-white cursor-pointer">
+                                <input type="radio" name="merek" class="hidden" value="hp">
+                                <span class="pl-2">HP</span>
+                            </label>
+                            <label class="flex bg-gray-100 text-gray-700 rounded-md px-3 py-2 has-[:checked]:bg-darkblue has-[:checked]:text-white cursor-pointer">
+                                <input type="radio" name="merek" class="hidden" value="lenovo">
+                                <span class="pl-2">Lenovo</span>
+                            </label>
+                            <label class="flex bg-gray-100 text-gray-700 rounded-md px-3 py-2 has-[:checked]:bg-darkblue has-[:checked]:text-white cursor-pointer">
+                                <input type="radio" name="merek" class="hidden" value="msi">
+                                <span class="pl-2">MSI</span>
+                            </label>
+                            <label class="flex bg-gray-100 text-gray-700 rounded-md px-3 py-2 has-[:checked]:bg-darkblue has-[:checked]:text-white cursor-pointer">
+                                <input type="radio" name="merek" class="hidden" value="axioo">
+                                <span class="pl-2">Axioo</span>
+                            </label>
+                            <label class="flex bg-gray-100 text-gray-700 rounded-md px-3 py-2 has-[:checked]:bg-darkblue has-[:checked]:text-white cursor-pointer">
+                                <input type="radio" name="merek" class="hidden" value="dell">
+                                <span class="pl-2">Dell</span>
+                            </label>
+                            <label class="flex bg-gray-100 text-gray-700 rounded-md px-3 py-2 has-[:checked]:bg-darkblue has-[:checked]:text-white cursor-pointer">
+                                <input type="radio" name="merek" class="hidden" value="tidak-ada">
+                                <span class="pl-2">Tidak Ada Preferensi</span>
+                            </label>
+                        </div>
+                    </form>
                 </div>
             </div>
             <div class="info bg-slate-400/40 flex flex-row items-center gap-3 w-full p-3 rounded-lg">

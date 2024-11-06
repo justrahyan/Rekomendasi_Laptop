@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cari Laptop | Rekomendasi Laptop Terbaik!</title>
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="./src/css/style.css" />
+    <link rel="stylesheet" href="./src/css/output.css" />
+
+    <!-- Favicon -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./src/img/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./src/img/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./src/img/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="./src/img/favicon/site.webmanifest" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="font-jakarta">
+    <!-- Navbar -->
+    <nav
+      class="fixed top-0 left-0 right-0 z-30 bg-white border border-b-slate-300 w-full"
+    >
+      <div
+        class="container px-8 py-5 flex flex-col mx-auto lg:flex-row justify-between items-center gap-5 lg:px-36 w-full"
+      >
+        <!-- Logo -->
+        <h1 class="font-bold">
+          <a href="index.php">
+            <img
+              src="./src/img/logo.svg"
+              alt="Cari Laptop Logo"
+              title="Rekomendasi Laptop Terbaik!"
+              class="w-40"
+            />
+          </a>
+        </h1>
+
+        <!-- Search -->
+        <div class="w-full lg:w-auto">
+          <div class="relative">
+            <div
+              class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+            >
+              <svg
+                class="w-4 h-4 text-slate-900"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                ></path>
+              </svg>
+            </div>
+            <form action="search.php" method="GET">
+              <input
+                type="search"
+                name="search"
+                placeholder="Temukan laptop anda"
+                class="py-2 px-5 pl-10 text-slate-600 rounded-full w-full lg:w-96 border border-slate-400 focus:border-paragraph focus:outline focus:outline-paragraph"
+              />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Error Section -->
+    <section id="product">
+      <div
+        class="container mx-auto pt-40 lg:pt-32 pb-10 flex flex-col justify-between lg:px-36"
+      >
+        <div class="text-center text-paragraph">
+          <!-- Error Code -->
+          <h1 class="text-9xl font-bold mb-4">404</h1>
+          <!-- Error Message -->
+          <h2 class="text-2xl font-semibold mb-2">
+            Oops! Halaman Tidak Ditemukan
+          </h2>
+          <p class="text-gray-600 mb-6">
+            Maaf, halaman yang Anda cari tidak tersedia atau mungkin telah
+            dihapus.
+          </p>
+          <!-- Back to Home Button -->
+          <a
+            href="javascript:history.back()"
+            class="inline-block bg-paragraph text-white text-sm py-2 px-6 rounded-full hover:bg-paragraph/70 transition duration-200"
+          >
+            Kembali ke Beranda
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Js -->
+    <script src="../src/js/script.js"></script>
+  </body>
+</html>
