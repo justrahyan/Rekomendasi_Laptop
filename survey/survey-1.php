@@ -51,6 +51,8 @@
     </nav>
 
     <!-- Guide Section -->
+    <form action="value-handler.php" method="POST">
+    <input type="hidden" name="survey_number" value="1">
     <section id="guide">
       <div class="container mx-auto px-4 pt-28 lg:px-36">
         <div class="progress flex flex-row items-center mb-4">
@@ -63,7 +65,6 @@
                     <h1 class="text-xl md:text-xl font-bold mb-2 lg:mb-5">Berapa budget yang kamu miliki untuk membeli sebuah laptop?</h1>
                 </div>
                 <div class="option px-5 w-full lg:w-1/2 text-paragraph">
-                    <form action="value-handler.php" method="POST">
                         <div class="space-y-3">
                             <label class="flex bg-gray-100 text-gray-700 rounded-md px-3 py-2 has-[:checked]:bg-darkblue has-[:checked]:text-white cursor-pointer">
                                 <input type="radio" name="budget" class="hidden" value="dibawah_5jt">
@@ -86,7 +87,6 @@
                                 <span class="pl-2">Di atas Rp. 20.000.000</span>
                             </label>
                         </div>
-                    </form>
                 </div>
             </div>
             <div class="info bg-slate-400/40 flex flex-row items-center gap-3 w-full p-3 rounded-lg">
@@ -98,16 +98,16 @@
         </div>
       </div>
      </section>
-
      <!-- Button -->
      <section id="button">
         <div class="container mx-auto px-4 py-3 flex flex-row justify-between items-center lg:px-36 mt-5">
             <!-- Next -->
-            <a href="./survey-2.php" class="py-3 px-8 bg-darkblue text-white w-full text-center gap-2 hover:bg-darkblue/80 rounded-lg">
+            <button type="submit" class="py-3 px-8 bg-darkblue text-white w-full text-center gap-2 hover:bg-darkblue/80 rounded-lg">
                 Lanjutkan
-            </a>
+            </button>
         </div>
     </section>
+    </form>
 
     <!-- Main Js -->
     <script src="../src/js/script.js"></script>

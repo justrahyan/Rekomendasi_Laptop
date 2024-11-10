@@ -51,58 +51,60 @@
     </nav>
 
     <!-- Guide Section -->
-    <section id="guide">
-      <div class="container mx-auto px-4 pt-28 lg:px-36">
-        <div class="progress flex flex-row items-center mb-4">
-            <div class="progress-bar bg-slate-200 w-[98%] h-3 flex justify-start gap-3 rounded-full overflow-hidden"></div>
-            <p class="text-paragraph text-sm w-[2%] text-end">2/7</p>
-        </div>
-        <div class="guide bg-skyblue border border-slate-300 w-full flex flex-col items-start pt-8 px-5 pb-5 gap-5 rounded-lg">
-            <div class="content w-full flex flex-col lg:flex-row items-start">
-                <div class="text px-5 w-full lg:w-1/2 text-paragraph">
-                    <h1 class="text-xl md:text-xl font-bold mb-2 lg:mb-5">Bagaimana penggunaan utama anda dalam menggunakan sebuah laptop?</h1>
+    <form action="value-handler.php" method="POST">
+        <input type="hidden" name="survey_number" value="2">
+        
+        <section id="guide">
+          <div class="container mx-auto px-4 pt-28 lg:px-36">
+            <div class="progress flex flex-row items-center mb-4">
+                <div class="progress-bar bg-slate-200 w-[98%] h-3 flex justify-start gap-3 rounded-full overflow-hidden"></div>
+                <p class="text-paragraph text-sm w-[2%] text-end">2/7</p>
+            </div>
+            <div class="guide bg-skyblue border border-slate-300 w-full flex flex-col items-start pt-8 px-5 pb-5 gap-5 rounded-lg">
+                <div class="content w-full flex flex-col lg:flex-row items-start">
+                    <div class="text px-5 w-full lg:w-1/2 text-paragraph">
+                        <h1 class="text-xl md:text-xl font-bold mb-2 lg:mb-5">Bagaimana penggunaan utama anda dalam menggunakan sebuah laptop?</h1>
+                    </div>
+                    <div class="option px-5 w-full lg:w-1/2 text-paragraph">
+                            <div class="space-y-3">
+                                <label class="flex bg-gray-100 text-gray-700 rounded-md px-3 py-2 has-[:checked]:bg-darkblue has-[:checked]:text-white cursor-pointer">
+                                    <input type="radio" name="penggunaan" class="hidden" value="gaming">
+                                    <span class="pl-2">Gaming/Streaming</span>
+                                </label>
+                                <label class="flex bg-gray-100 text-gray-700 rounded-md px-3 py-2 has-[:checked]:bg-darkblue has-[:checked]:text-white cursor-pointer">
+                                    <input type="radio" name="penggunaan" class="hidden" value="productivity">
+                                    <span class="pl-2">Productivity/Keperluan Kerja</span>
+                                </label>
+                                <label class="flex bg-gray-100 text-gray-700 rounded-md px-3 py-2 has-[:checked]:bg-darkblue has-[:checked]:text-white cursor-pointer">
+                                    <input type="radio" name="penggunaan" class="hidden" value="daily-use">
+                                    <span class="pl-2">Daily Use (Sekolah/Kuliah)</span>
+                                </label>
+                            </div>
+                    </div>
                 </div>
-                <div class="option px-5 w-full lg:w-1/2 text-paragraph">
-                    <form action="value-handler.php" method="POST">
-                        <div class="space-y-3">
-                            <label class="flex bg-gray-100 text-gray-700 rounded-md px-3 py-2 has-[:checked]:bg-darkblue has-[:checked]:text-white cursor-pointer">
-                                <input type="radio" name="penggunaan" class="hidden" value="gaming">
-                                <span class="pl-2">Gaming/Streaming</span>
-                            </label>
-                            <label class="flex bg-gray-100 text-gray-700 rounded-md px-3 py-2 has-[:checked]:bg-darkblue has-[:checked]:text-white cursor-pointer">
-                                <input type="radio" name="penggunaan" class="hidden" value="productivity">
-                                <span class="pl-2">Productivity/Keperluan Kerja</span>
-                            </label>
-                            <label class="flex bg-gray-100 text-gray-700 rounded-md px-3 py-2 has-[:checked]:bg-darkblue has-[:checked]:text-white cursor-pointer">
-                                <input type="radio" name="penggunaan" class="hidden" value="daily-use">
-                                <span class="pl-2">Daily Use (Sekolah/Kuliah)</span>
-                            </label>
-                        </div>
-                    </form>
+                <div class="info bg-slate-400/40 flex flex-row items-center gap-3 w-full p-3 rounded-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-14 h-14 md:w-8 md:h-8 lg:w-5 lg:h-5" viewBox="0 0 24 24">
+                        <path fill="#3f3e47" d="M11 17h2v-6h-2zm1-8q.425 0 .713-.288T13 8t-.288-.712T12 7t-.712.288T11 8t.288.713T12 9m0 13q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22"/>
+                    </svg>
+                    <p class="text-xs md:text-sm text-paragraph">Jawab pertanyaan diatas sesuai dengan kebutuhan dan preferensi kamu, agar kami dapat memberikan rekomendasi yang tepat.</p>
                 </div>
             </div>
-            <div class="info bg-slate-400/40 flex flex-row items-center gap-3 w-full p-3 rounded-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-14 h-14 md:w-8 md:h-8 lg:w-5 lg:h-5" viewBox="0 0 24 24">
-                    <path fill="#3f3e47" d="M11 17h2v-6h-2zm1-8q.425 0 .713-.288T13 8t-.288-.712T12 7t-.712.288T11 8t.288.713T12 9m0 13q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22"/>
-                </svg>
-                <p class="text-xs md:text-sm text-paragraph">Jawab pertanyaan diatas sesuai dengan kebutuhan dan preferensi kamu, agar kami dapat memberikan rekomendasi yang tepat.</p>
+          </div>
+         </section>
+    
+         <!-- Button -->
+         <section id="button">
+            <div class="container mx-auto px-4 py-3 flex flex-row justify-between gap-5 items-center lg:px-36 mt-5">
+                <!-- Next -->
+                <a href="./survey-1.php" class="py-3 px-8 bg-white text-darkblue border border-darkblue w-1/2 text-center hover:bg-white/80 rounded-lg">
+                    Kembali
+                </a>
+                <button type="submit" class="py-3 px-8 bg-darkblue text-white w-1/2 text-center hover:bg-darkblue/80 rounded-lg">
+                    Lanjutkan
+                </button>
             </div>
-        </div>
-      </div>
-     </section>
-
-     <!-- Button -->
-     <section id="button">
-        <div class="container mx-auto px-4 py-3 flex flex-row justify-between gap-5 items-center lg:px-36 mt-5">
-            <!-- Next -->
-            <a href="./survey-1.php" class="py-3 px-8 bg-white text-darkblue border border-darkblue w-1/2 text-center hover:bg-white/80 rounded-lg">
-                Kembali
-            </a>
-            <a href="./survey-3.php" class="py-3 px-8 bg-darkblue text-white w-1/2 text-center hover:bg-darkblue/80 rounded-lg">
-                Lanjutkan
-            </a>
-        </div>
-    </section>
+        </section>
+    </form>
 
     <!-- Main Js -->
     <script src="../src/js/script.js"></script>
