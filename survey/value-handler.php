@@ -66,32 +66,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             break;
     }
 
+    // After saving survey data in the session
     $_SESSION['survey_data'] = $surveyData;
 
-    // Jika sudah selesai dengan survey ke-7, proses data dan redirect ke hasil.
+    // Save survey data to JSON file
+    file_put_contents('survey_result.json', json_encode($surveyData));
+
+    // If already completed with survey number 7, process data and redirect to results
     if ($surveyNumber === 7) {
-        // Konversi array ke format JSON untuk dikirim ke Python
-        $jsonData = json_encode($surveyData);
-    
-        // Eksekusi Python script (sesuaikan path sesuai kebutuhan)
-        $pythonScript = 'python3 expert_system.py ' . escapeshellarg($jsonData);
-        $output = shell_exec($pythonScript);
-    
-        // Decode hasil dari Python jika ada
-        $result = json_decode($output, true);
-    
-        // Simpan hasil ke session
-        if ($result) {
-            $_SESSION['expert_system_result'] = $result;
-        } else {
-            $_SESSION['expert_system_result'] = [];
-        }
-    
+        // Execute Python script (adjust path as needed)
+        $pythonScript = 'python expert_system.py';  // Pastikan pathnya benar sesuai direktori project
+        exec($pythonScript, $output);  // Menjalankan skrip Python dan mendapatkan output
+
+        // Menyimpan output dari skrip Python ke dalam session
+        $result = json_decode($output[0], true);
+        $_SESSION['expert_system_result'] = $result;
+
         // Redirect ke halaman hasil
-        header('Location: survey-result.php');
+        header('Location: ./survey-result.php');
         exit();
     } else {
-        // Redirect ke halaman survei berikutnya
+        // Redirect to next survey page
         header('Location: survey-'.($surveyNumber + 1).'.php');
         exit();
     }

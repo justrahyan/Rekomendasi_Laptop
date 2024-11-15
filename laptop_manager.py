@@ -43,11 +43,11 @@ class LaptopManager:
             }
             harga = budget_mapping.get(filters['budget'], (0, float('inf')))
 
-        # Assign usage and brand if provided
-        if 'usage' in filters:
-            penggunaan = filters['usage']
-        if 'brand' in filters:
-            merek = filters['brand']
+        # Assign usage and merek if provided
+        if 'penggunaan' in filters:
+            penggunaan = filters['penggunaan']
+        if 'merek' in filters:
+            merek = filters['merek']
 
         return self.get_laptops_by_criteria(harga, penggunaan, merek)
 
@@ -86,4 +86,3 @@ class LaptopManager:
         ]
 
         return laptops
-

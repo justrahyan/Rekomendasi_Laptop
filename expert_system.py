@@ -1,10 +1,13 @@
 import json
 import sys
+import time
+import os
+from watchdog.observers import Observer
+from watchdog.events import FileSystemEventHandler
 from laptop_manager import LaptopManager
 
 class Laptop:
     def __init__(self, id_laptop, nama_laptop, tahun, kode_laptop, merek, seri, penggunaan, ram, penyimpanan, GPU, prosessor, OS, display, io_port, baterai, berat, webcam, harga, gambar):
-        # Definisi class Laptop tetap sama
         self.id_laptop = id_laptop
         self.nama_laptop = nama_laptop
         self.tahun = tahun
@@ -31,9 +34,7 @@ class ExpertSystem:
 
     def search(self, filters):
         filtered_laptops = self.laptop_manager.get_laptops_by_criteria(filters)
-        print("Original laptops:", len(filtered_laptops))
-
-        # Mengonversi budget menjadi angka untuk perbandingan
+        
         budget_mapping = {
             "dibawah_5jt": 5000000,
             "5jt_sampai_10jt": (5000000, 10000000),
@@ -42,26 +43,19 @@ class ExpertSystem:
             "diatas_20jt": 20000000,
         }
 
-        # Filter berdasarkan budget
         if 'budget' in filters and filters['budget'] in budget_mapping:
             budget_value = budget_mapping[filters['budget']]
             if isinstance(budget_value, tuple):
                 filtered_laptops = [laptop for laptop in filtered_laptops if budget_value[0] <= laptop.harga <= budget_value[1]]
             else:
                 filtered_laptops = [laptop for laptop in filtered_laptops if laptop.harga <= budget_value]
-        print("After budget filter:", len(filtered_laptops))
 
-        # Filter berdasarkan penggunaan
-        if 'usage' in filters:
-            filtered_laptops = [laptop for laptop in filtered_laptops if laptop.penggunaan.lower() == filters['usage'].lower()]
-        print("After usage filter:", len(filtered_laptops))
-        
-        # Filter berdasarkan merek
-        if 'brand' in filters:
-            filtered_laptops = [laptop for laptop in filtered_laptops if laptop.merek.lower() == filters['brand'].lower()]
-        print("After brand filter:", len(filtered_laptops))
+        if 'penggunaan' in filters:
+            filtered_laptops = [laptop for laptop in filtered_laptops if laptop.penggunaan.lower() == filters['penggunaan'].lower()]
 
-        # Filter berdasarkan ukuran layar
+        if 'merek' in filters:
+            filtered_laptops = [laptop for laptop in filtered_laptops if laptop.merek.lower() == filters['merek'].lower()]
+
         if 'layar' in filters:
             if filters['layar'] == 'dibawah_13':
                 filtered_laptops = [laptop for laptop in filtered_laptops if '13' not in laptop.display and '14' not in laptop.display]
@@ -71,9 +65,7 @@ class ExpertSystem:
                 filtered_laptops = [laptop for laptop in filtered_laptops if '15' in laptop.display or '16' in laptop.display]
             elif filters['layar'] == 'diatas_16':
                 filtered_laptops = [laptop for laptop in filtered_laptops if '17' in laptop.display or '18' in laptop.display]
-        print("After display filter:", len(filtered_laptops))
 
-        # Filter berdasarkan RAM
         if 'ram' in filters:
             try:
                 ram_capacity = int(filters['ram'].replace("gb", "").strip())
@@ -83,26 +75,19 @@ class ExpertSystem:
                 ]
             except ValueError:
                 print("Invalid RAM filter value:", filters['ram'])
-        print("After RAM filter:", len(filtered_laptops))
 
-        # Filter berdasarkan penyimpanan
-        if 'storage' in filters:
-            storage_type = filters['storage'].lower()
+        if 'penyimpanan' in filters:
+            storage_type = filters['penyimpanan'].lower()
             if storage_type == 'ssd':
                 filtered_laptops = [laptop for laptop in filtered_laptops if 'SSD' in laptop.penyimpanan]
-        print("After storage filter:", len(filtered_laptops))
         
-        # Filter berdasarkan tahun keluaran terbaru (misalnya tahun ini)
         if 'keluaran' in filters and filters['keluaran'] == "terbaru":
-            current_year = 2024  # Misalnya tahun saat ini
+            current_year = 2024
             filtered_laptops = [laptop for laptop in filtered_laptops if laptop.tahun == current_year]
-        print("After release year filter:", len(filtered_laptops))
 
         return filtered_laptops
 
-
-
-    def get_filtered_laptops_as_json(self, filters):
+    def get_filtered_laptops(self, filters):
         filtered_laptops = self.search(filters)
         laptop_dicts = [
             {
@@ -128,29 +113,58 @@ class ExpertSystem:
             }
             for laptop in filtered_laptops
         ]
-        return json.dumps(laptop_dicts, indent=4)
+        return laptop_dicts
+
+    def save_results(self, result_json):
+        with open('survey/expert-system-results.json', 'w') as f:
+            f.write(json.dumps(result_json, indent=4))
+        print("Results updated in expert-system-results.json")
+
+class SurveyFileHandler(FileSystemEventHandler):
+    def __init__(self, expert_system):
+        self.expert_system = expert_system
+
+    def on_modified(self, event):
+        if event.src_path.endswith("survey_result.json"):
+            print("Detected change in survey_result.json")
+            filters = load_survey_data()
+            if filters:
+                result_json = self.expert_system.get_filtered_laptops(filters)
+                self.expert_system.save_results(result_json)
+
+def load_survey_data():
+    try:
+        with open('survey/survey_result.json', 'r') as f:
+            survey_data = json.load(f)
+        return {
+            "budget": survey_data.get('budget', "N/A"),
+            "penggunaan": survey_data.get('penggunaan', "N/A"),
+            "merek": survey_data.get('merek', "N/A"),
+            "layar": survey_data.get('layar', "N/A"),
+            "ram": survey_data.get('ram', "N/A"),
+            "penyimpanan": survey_data.get('penyimpanan', "N/A"),
+            "keluaran": survey_data.get('keluaran', "N/A")
+        }
+    except FileNotFoundError:
+        print("Error: survey_result.json not found.")
+        return None
+    except json.JSONDecodeError:
+        print("Error: Failed to decode JSON in survey_result.json.")
+        return None
 
 if __name__ == "__main__":
-    # Check if the script was called with a command-line argument
-    if len(sys.argv) > 1:
-        # Assume the first argument is the JSON data
-        json_data = sys.argv[1]
-        simulated_filters = {
-        "budget": "dibawah_5jt",
-        "penggunaan": "gaming",
-        "merek": "acer",
-        "layar": "15_sampai_16",
-        "ram": "32gb",
-        "penyimpanan": "ssd",
-        "keluaran": "terbaru"
-    }
-    else:
-        simulated_filters = {}
-
-    # Ambil data laptop dari database
     laptop_manager = LaptopManager()
-
     expert_system = ExpertSystem(laptop_manager)
-    result_json = expert_system.get_filtered_laptops_as_json(simulated_filters)
-    
-    print(result_json)
+
+    event_handler = SurveyFileHandler(expert_system)
+    observer = Observer()
+    observer.schedule(event_handler, path='survey', recursive=False)
+    observer.start()
+
+    try:
+        while True:
+            time.sleep(1)
+    except KeyboardInterrupt:
+        observer.stop()
+        print("Program stopped by user.")
+    observer.join()

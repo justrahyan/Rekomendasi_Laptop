@@ -80,7 +80,7 @@
                 <div class="spesifikasi text-xs text-slate-400 truncate"><?php echo $row['prosessor']; ?></div>
               </div>
             </a>
-        </div>
+          </div>
         <?php } ?>
         </div>
       </div>

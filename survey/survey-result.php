@@ -1,10 +1,19 @@
 <?php 
 include "../koneksi.php"; 
-session_start(); 
+session_start();
+
+function formatRupiah($angka) {
+    return 'Rp ' . number_format($angka, 0, ',', '.');
+}
 
 // Ambil data hasil survei dari session
 $surveyData = isset($_SESSION['survey_data']) ? $_SESSION['survey_data'] : [];
-$expertResults = isset($_SESSION['expert_system_result']) ? $_SESSION['expert_system_result'] : [];
+if (file_exists('expert-system-results.json')) {
+    $result_data = file_get_contents('expert-system-results.json');
+    $expert_system_result = json_decode($result_data, true);
+} else {
+    $expert_system_result = [];
+}
 
 // Menyusun data input pengguna untuk ditampilkan kembali jika perlu
 $budget = isset($surveyData['budget']) ? htmlspecialchars($surveyData['budget']) : 'N/A';
@@ -164,17 +173,20 @@ if($keluaran == "terbaru"){
 
             <!-- Menampilkan Hasil Rekomendasi Laptop -->
             <div class="product-container flex flex-wrap w-full lg:w-3/4 gap-3 px-4 lg:px-0" id="product-list">
-                <?php if (isset($_SESSION['expert_system_result']) && !empty($_SESSION['expert_system_result'])): ?>
-                    <ul>
-                        <?php foreach ($_SESSION['expert_system_result'] as $laptop): ?>
-                            <li>
-                                <h3><?php echo htmlspecialchars($laptop['nama_laptop']); ?></h3>
-                                <p>Harga: Rp. <?php echo number_format($laptop['harga'], 0, ',', '.'); ?></p>
-                                <!-- Tambahkan informasi lain yang ingin ditampilkan, seperti spesifikasi -->
-                                <p>Spesifikasi: <?php echo htmlspecialchars($laptop['processor']); ?>, <?php echo htmlspecialchars($laptop['ram']); ?> RAM, <?php echo htmlspecialchars($laptop['penyimpanan']); ?></p>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
+                <?php if (!empty($expert_system_result)): ?>
+                    <?php foreach ($expert_system_result as $laptop): ?>
+                        <div class="brand-products group">
+                            <a href="../laptop.php?id=<?php echo $laptop['id_laptop'] ?>">
+                                <img src="<?php echo '../src/img/laptop-img/' . $laptop['gambar']; ?>" alt="" class="w-[70%] lg:w-full mx-auto object-cover bg-white p-2 transform transition duration-300 group-hover:scale-110">
+                                <div class="content py-2 px-3 flex flex-col flex-grow">
+                                    <div class="penggunaan text-xs mb-2 text-slate-400 capitalize"><?php echo $laptop['penggunaan']; ?></div>
+                                    <div class="nama text-sm font-semibold mb-2 hover:underline capitalize"><?php echo $laptop['nama_laptop']; ?></div>
+                                    <div class="nama text-xs font-normal mb-2 uppercase"><?php echo $laptop['kode_laptop']; ?></div>
+                                    <div class="spesifikasi text-xs text-slate-400 truncate"><?php echo $laptop['prosessor']; ?></div>
+                                </div>
+                            </a>
+                        </div>
+                    <?php endforeach; ?>
                 <?php else: ?>
                     <p>Tidak ada laptop yang ditemukan berdasarkan kriteria Anda.</p>
                 <?php endif; ?>
