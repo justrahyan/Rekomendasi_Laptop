@@ -51,7 +51,7 @@
     </nav>
 
     <!-- Guide Section -->
-    <form action="value-handler.php" method="POST">
+    <form action="value-handler.php" method="POST" onsubmit="return validateSelection()">
         <input type="hidden" name="survey_number" value="5">
         
         <section id="guide">
@@ -112,5 +112,22 @@
 
     <!-- Main Js -->
     <script src="../src/js/script.js"></script>
+    <script>
+        function validateSelection() {
+            const radios = document.getElementsByName('ram');
+            let isChecked = false;
+            for (const radio of radios) {
+                if (radio.checked) {
+                    isChecked = true;
+                    break;
+                }
+            }
+            if (!isChecked) {
+                alert("Silakan pilih salah satu opsi sebelum melanjutkan.");
+                return false; // Mencegah form untuk submit
+            }
+            return true; // Melanjutkan submit jika sudah memilih
+        }
+    </script>
 </body>
 </html>

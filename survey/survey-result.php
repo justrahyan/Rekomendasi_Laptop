@@ -173,27 +173,7 @@ if($keluaran == "terbaru"){
 
             <!-- Menampilkan Hasil Rekomendasi Laptop -->
             <div class="product-container flex flex-wrap w-full lg:w-3/4 gap-3 px-4 lg:px-0">
-                
-                <?php
-                    $query = "SELECT * FROM laptop ORDER BY nama_laptop ASC LIMIT 10;";
-                    $result = mysqli_query($koneksi, $query);
-                    // var_dump($result);
-                    $i = 1; 
-                    while($row = mysqli_fetch_assoc($result)){
-                    ?>
-                    <div class="product group">
-                        <a href="laptop.php?id=<?php echo $row['id_laptop'] ?>">
-                        <img src="<?php echo '../src/img/laptop-img/' . $row['gambar']; ?>" alt="" class="w-[70%] lg:w-full mx-auto object-cover bg-white p-2 transform transition duration-300 group-hover:scale-110">
-                        <div class="content py-2 px-3 flex flex-col flex-grow">
-                            <div class="penggunaan text-xs mb-2 text-slate-400 capitalize"><?php echo $row['penggunaan']; ?></div>
-                            <div class="nama text-sm font-semibold mb-2 hover:underline capitalize"><?php echo $row['nama_laptop']; ?></div>
-                            <div class="nama text-xs font-normal mb-2 uppercase"><?php echo $row['kode_laptop']; ?></div>
-                            <div class="spesifikasi text-xs text-slate-400 truncate"><?php echo $row['prosessor']; ?></div>
-                        </div>
-                        </a>
-                </div>
-                <?php } ?>
-                <!-- <?php if (!empty($expert_system_result)): ?>
+                <?php if (!empty($expert_system_result)): ?>
                     <?php foreach ($expert_system_result as $laptop): ?>
                         <div class="brand-products group">
                             <a href="../laptop.php?id=<?php echo $laptop['id_laptop'] ?>">
@@ -209,7 +189,7 @@ if($keluaran == "terbaru"){
                     <?php endforeach; ?>
                 <?php else: ?>
                     <p>Tidak ada laptop yang ditemukan berdasarkan kriteria Anda.</p>
-                <?php endif; ?> -->
+                <?php endif; ?>
             </div>
         </div>
     </div>
