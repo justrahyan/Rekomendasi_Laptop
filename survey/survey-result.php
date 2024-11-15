@@ -139,7 +139,7 @@ if($keluaran == "terbaru"){
 <body class="font-jakarta">
 
 <!-- Navbar -->
-<nav class="fixed top-0 left-0 right-0 z-30 bg-white border border-b-slate-300 w-full">
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white border border-b-slate-300 w-full">
     <div class="container px-8 py-5 mx-auto flex flex-row justify-between items-center gap-5 lg:px-36">
         <a href="../index.php" class="py-2 px-0 lg:px-8 flex items-center gap-2 hover:underline">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -153,14 +153,14 @@ if($keluaran == "terbaru"){
 
 <!-- Guide Section -->
 <section id="product">
-    <div class="container mx-auto pt-40 lg:pt-28 pb-10 flex flex-col justify-between lg:px-36">
+    <div class="container mx-auto pt-28 lg:pt-28 pb-10 flex flex-col justify-between lg:px-36">
         <div class="product-heading mb-4 pb-4 border-b-paragraph border-b">
             <h1 class="font-bold text-xl text-center">Hasil Survei Rekomendasi</h1>
         </div>
 
         <!-- Menampilkan Input Pengguna -->
         <div class="input-container flex flex-col gap-3 lg:gap-0 lg:flex-row">
-            <div class="input-user bg-white overflow-hidden flex flex-col w-full lg:w-1/4 gap-2 py-3 px-4 lg:py-0 sticky top-[9rem] lg:top-[6rem] z-50" style="align-self: flex-start;" id="inputValues">
+            <div class="input-user bg-white overflow-hidden flex flex-col w-full lg:w-1/4 gap-2 py-3 px-4 lg:py-0 sticky lg:top-[6rem] z-30" style="align-self: flex-start;" id="inputValues">
                 <h1 class="font-semibold text-lg">Pilihan Anda</h1>
                 <p>Budget: <?php echo $budget; ?></p>
                 <p>Penggunaan: <?php echo $penggunaan; ?></p>
@@ -172,8 +172,28 @@ if($keluaran == "terbaru"){
             </div>
 
             <!-- Menampilkan Hasil Rekomendasi Laptop -->
-            <div class="product-container flex flex-wrap w-full lg:w-3/4 gap-3 px-4 lg:px-0" id="product-list">
-                <?php if (!empty($expert_system_result)): ?>
+            <div class="product-container flex flex-wrap w-full lg:w-3/4 gap-3 px-4 lg:px-0">
+                
+                <?php
+                    $query = "SELECT * FROM laptop ORDER BY nama_laptop ASC LIMIT 10;";
+                    $result = mysqli_query($koneksi, $query);
+                    // var_dump($result);
+                    $i = 1; 
+                    while($row = mysqli_fetch_assoc($result)){
+                    ?>
+                    <div class="product group">
+                        <a href="laptop.php?id=<?php echo $row['id_laptop'] ?>">
+                        <img src="<?php echo '../src/img/laptop-img/' . $row['gambar']; ?>" alt="" class="w-[70%] lg:w-full mx-auto object-cover bg-white p-2 transform transition duration-300 group-hover:scale-110">
+                        <div class="content py-2 px-3 flex flex-col flex-grow">
+                            <div class="penggunaan text-xs mb-2 text-slate-400 capitalize"><?php echo $row['penggunaan']; ?></div>
+                            <div class="nama text-sm font-semibold mb-2 hover:underline capitalize"><?php echo $row['nama_laptop']; ?></div>
+                            <div class="nama text-xs font-normal mb-2 uppercase"><?php echo $row['kode_laptop']; ?></div>
+                            <div class="spesifikasi text-xs text-slate-400 truncate"><?php echo $row['prosessor']; ?></div>
+                        </div>
+                        </a>
+                </div>
+                <?php } ?>
+                <!-- <?php if (!empty($expert_system_result)): ?>
                     <?php foreach ($expert_system_result as $laptop): ?>
                         <div class="brand-products group">
                             <a href="../laptop.php?id=<?php echo $laptop['id_laptop'] ?>">
@@ -189,7 +209,7 @@ if($keluaran == "terbaru"){
                     <?php endforeach; ?>
                 <?php else: ?>
                     <p>Tidak ada laptop yang ditemukan berdasarkan kriteria Anda.</p>
-                <?php endif; ?>
+                <?php endif; ?> -->
             </div>
         </div>
     </div>

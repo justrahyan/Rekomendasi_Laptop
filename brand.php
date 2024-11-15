@@ -30,7 +30,7 @@
 </head>
 <body class="font-jakarta">
     <!-- Navbar -->
-    <nav class="fixed top-0 left-0 right-0 z-30 bg-white border border-b-slate-300 w-full">
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white border border-b-slate-300 w-full">
         <div class="container px-8 py-5 flex flex-col mx-auto lg:flex-row justify-between items-center gap-5 lg:px-36 w-full">
             <!-- Back -->
             <a href="./index.php" class="py-2 px-0 lg:px-8 flex items-center gap-2 hover:underline">
@@ -69,9 +69,9 @@
           <img src="<?php echo $logoPath; ?>" alt="<?php echo $merek; ?> logo" class="w-20 mx-auto lg:ml-0">
         </div>
         <div class="brand-container flex flex-col gap-3 lg:gap-0 lg:flex-row">
-          <div class="brand-series bg-white overflow-hidden flex flex-col w-full lg:w-1/4 gap-2 py-3 px-4 lg:py-0 sticky top-[9rem] lg:top-[6rem] z-50" style="align-self: flex-start;" id="brandSeries">
+          <div class="brand-series bg-white overflow-hidden flex flex-col w-full lg:w-1/4 gap-2 py-3 px-4 lg:py-0 sticky top-[9rem] lg:top-[6rem] z-30" style="align-self: flex-start;" id="brandSeries">
             <h1 class="font-semibold text-lg" onclick="toggleBrandSeries()">Berdasarkan Seri</h1>
-              <div class="hidden lg:flex flex-col gap-2 transition-all duration-300 ease-in-out" id="brandContent">
+              <div class="hidden lg:flex flex-col gap-4 transition-all duration-300 ease-in-out" id="brandContent">
                 <?php
                 $merek = isset($_GET['merek']) ? strtolower($_GET['merek']) : '';
 
