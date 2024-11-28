@@ -31,7 +31,7 @@ class LaptopManager:
         harga = None
         penggunaan = None
         merek = None
-
+        
         # Map budget to a specific range or value
         if 'budget' in filters:
             budget_mapping = {
@@ -42,13 +42,13 @@ class LaptopManager:
                 "diatas_20jt": (20000000, float('inf')),
             }
             harga = budget_mapping.get(filters['budget'], (0, float('inf')))
-
-        # Assign usage and merek if provided
+        
+        # Assign usage and brand if provided
         if 'penggunaan' in filters:
             penggunaan = filters['penggunaan']
         if 'merek' in filters:
             merek = filters['merek']
-
+        
         return self.get_laptops_by_criteria(harga, penggunaan, merek)
 
     def get_laptops_by_criteria(self, harga=None, penggunaan=None, merek=None):
@@ -56,20 +56,22 @@ class LaptopManager:
         params = {}
 
         # Debugging values of each parameter before appending to params
-
         if harga is not None and isinstance(harga, tuple):
             query += " AND harga BETWEEN %(harga_min)s AND %(harga_max)s"
             params['harga_min'] = harga[0]
             params['harga_max'] = harga[1]
-
+        
         if penggunaan is not None:
             query += " AND penggunaan = %(penggunaan)s"
             params['penggunaan'] = penggunaan
-
+        
         if merek is not None:
             query += " AND merek = %(merek)s"
             params['merek'] = merek
-
+        
+        # Log the query and parameters for debugging
+        print("Executing Query:", query)
+        print("With Parameters:", params)
 
         # Execute the query with the dictionary as a single parameter
         result = self.conn.execute_query(query, params)
@@ -77,12 +79,14 @@ class LaptopManager:
         # Convert query results to Laptop objects
         laptops = [
             Laptop(
-                row['id_laptop'], row['nama_laptop'], row['tahun'], row['kode_laptop'],
-                row['merek'], row['seri'], row['penggunaan'], row['ram'], row['penyimpanan'],
-                row['GPU'], row['prosessor'], row['OS'], row['display'], row['io_port'],
-                row['baterai'], row['berat'], row['webcam'], row['harga'], row['gambar']
-            )
-            for row in result
+                row['id_laptop'], row['nama_laptop'], row['tahun'],
+                row['kode_laptop'], row['merek'], row['seri'],
+                row['penggunaan'], row['ram'], row['penyimpanan'],
+                row['GPU'], row['prosessor'], row['OS'],
+                row['display'], row['io_port'], row['baterai'],
+                row['berat'], row['webcam'], row['harga'],
+                row['gambar']
+            ) for row in result
         ]
-
+        
         return laptops

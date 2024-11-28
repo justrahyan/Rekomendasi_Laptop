@@ -40,7 +40,7 @@ class ExpertSystem:
             "5jt_sampai_10jt": (5000000, 10000000),
             "10jt_sampai_15jt": (10000000, 15000000),
             "15jt_20jt": (15000000, 20000000),
-            "diatas_20jt": 20000000,
+            "diatas_20jt": (20000000, float('inf')),
         }
 
         if 'budget' in filters and filters['budget'] in budget_mapping:
@@ -48,13 +48,16 @@ class ExpertSystem:
             if isinstance(budget_value, tuple):
                 filtered_laptops = [laptop for laptop in filtered_laptops if budget_value[0] <= laptop.harga <= budget_value[1]]
             else:
-                filtered_laptops = [laptop for laptop in filtered_laptops if laptop.harga <= budget_value]
+                filtered_laptops = [laptop for laptop in filtered_laptops if laptop.harga > budget_value]
+            print(f"After budget filter ({filters['budget']}): {len(filtered_laptops)} laptops found")
 
         if 'penggunaan' in filters:
             filtered_laptops = [laptop for laptop in filtered_laptops if laptop.penggunaan.lower() == filters['penggunaan'].lower()]
+            print(f"After usage filter ({filters['penggunaan']}): {len(filtered_laptops)} laptops found")
 
         if 'merek' in filters:
             filtered_laptops = [laptop for laptop in filtered_laptops if laptop.merek.lower() == filters['merek'].lower()]
+            print(f"After brand filter ({filters['merek']}): {len(filtered_laptops)} laptops found")
 
         if 'layar' in filters:
             if filters['layar'] == 'dibawah_13':
@@ -65,6 +68,7 @@ class ExpertSystem:
                 filtered_laptops = [laptop for laptop in filtered_laptops if '15' in laptop.display or '16' in laptop.display]
             elif filters['layar'] == 'diatas_16':
                 filtered_laptops = [laptop for laptop in filtered_laptops if '17' in laptop.display or '18' in laptop.display]
+            print(f"After display filter ({filters['layar']}): {len(filtered_laptops)} laptops found")
 
         if 'ram' in filters:
             try:
@@ -75,15 +79,19 @@ class ExpertSystem:
                 ]
             except ValueError:
                 print("Invalid RAM filter value:", filters['ram'])
+            print(f"After RAM filter ({filters['ram']}): {len(filtered_laptops)} laptops found")
 
         if 'penyimpanan' in filters:
             storage_type = filters['penyimpanan'].lower()
             if storage_type == 'ssd':
                 filtered_laptops = [laptop for laptop in filtered_laptops if 'SSD' in laptop.penyimpanan]
+            print(f"After storage filter ({filters['penyimpanan']}): {len(filtered_laptops)} laptops found")
         
         if 'keluaran' in filters and filters['keluaran'] == "terbaru":
             current_year = 2024
             filtered_laptops = [laptop for laptop in filtered_laptops if laptop.tahun == current_year]
+        print(f"After release year filter ({filters['keluaran']}): {len(filtered_laptops)} laptops found")
+
 
         return filtered_laptops
 
@@ -131,6 +139,7 @@ class SurveyFileHandler(FileSystemEventHandler):
             if filters:
                 result_json = self.expert_system.get_filtered_laptops(filters)
                 self.expert_system.save_results(result_json)
+
 
 def load_survey_data():
     try:
